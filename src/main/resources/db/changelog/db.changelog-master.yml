@@ -85,7 +85,7 @@ databaseChangeLog:
                   value: session-001
               - column:
                   name: ts
-                  valueDate: "2024-08-01T10:00:00Z"
+                  valueComputed: "TIMESTAMP WITH TIME ZONE '2024-08-01T10:00:00Z'"
               - column:
                   name: speed_kmh
                   valueNumeric: 8.5
@@ -109,7 +109,7 @@ databaseChangeLog:
                   value: "0xAA01"
               - column:
                   name: created_at
-                  valueDate: "2024-08-01T10:00:01Z"
+                  valueComputed: "TIMESTAMP WITH TIME ZONE '2024-08-01T10:00:01Z'"
         - insert:
             tableName: treadmill_sample
             columns:
@@ -121,7 +121,7 @@ databaseChangeLog:
                   value: session-001
               - column:
                   name: ts
-                  valueDate: "2024-08-01T10:05:00Z"
+                  valueComputed: "TIMESTAMP WITH TIME ZONE '2024-08-01T10:05:00Z'"
               - column:
                   name: speed_kmh
                   valueNumeric: 9.0
@@ -145,7 +145,7 @@ databaseChangeLog:
                   value: "0xAA02"
               - column:
                   name: created_at
-                  valueDate: "2024-08-01T10:05:01Z"
+                  valueComputed: "TIMESTAMP WITH TIME ZONE '2024-08-01T10:05:01Z'"
         - insert:
             tableName: treadmill_sample
             columns:
@@ -157,7 +157,7 @@ databaseChangeLog:
                   value: session-002
               - column:
                   name: ts
-                  valueDate: "2024-08-02T18:20:00Z"
+                  valueComputed: "TIMESTAMP WITH TIME ZONE '2024-08-02T18:20:00Z'"
               - column:
                   name: speed_kmh
                   valueNumeric: 6.2
@@ -181,4 +181,4 @@ databaseChangeLog:
                   value: "0xBB01"
               - column:
                   name: created_at
-                  valueDate: "2024-08-02T18:20:01Z"
+                  valueComputed: "TIMESTAMP WITH TIME ZONE '2024-08-02T18:20:01Z'"
