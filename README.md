@@ -98,6 +98,18 @@ curl "http://localhost:8080/api/live/stream?deviceId=REEBOK_1020&limit=200" \
   -H "X-API-Key: local-dev-key"
 ```
 
+### Get the latest live stream sample
+
+```bash
+curl "http://localhost:8080/api/live/latest" \
+  -H "X-API-Key: local-dev-key"
+```
+
+```bash
+curl "http://localhost:8080/api/live/latest?deviceId=REEBOK_1020" \
+  -H "X-API-Key: local-dev-key"
+```
+
 ## Hosting (Railway)
 
 - Create a PostgreSQL database in Railway.
