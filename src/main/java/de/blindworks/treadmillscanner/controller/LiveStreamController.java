@@ -39,6 +39,15 @@ public class LiveStreamController {
     return ResponseEntity.ok(service.getLatestSamples(deviceId, resolvedLimit));
   }
 
+  @GetMapping("/latest")
+  public ResponseEntity<LiveStreamSampleResponse> getLatestSample(
+      @RequestParam(required = false) String deviceId) {
+    return service
+        .getLatestSample(deviceId)
+        .map(ResponseEntity::ok)
+        .orElseGet(() -> ResponseEntity.notFound().build());
+  }
+
   private int clamp(Integer limit, int defaultLimit, int maxLimit) {
     if (limit == null || limit <= 0) {
       return defaultLimit;

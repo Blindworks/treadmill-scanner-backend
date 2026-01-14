@@ -6,6 +6,7 @@ import de.blindworks.treadmillscanner.entity.LiveStreamSample;
 import de.blindworks.treadmillscanner.repository.LiveStreamSampleRepository;
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
@@ -54,6 +55,15 @@ public class LiveStreamSampleService {
     return repository.findByDeviceIdOrderByTsDesc(deviceId, pageable).stream()
         .map(this::toResponse)
         .toList();
+  }
+
+  @Transactional(readOnly = true)
+  public Optional<LiveStreamSampleResponse> getLatestSample(String deviceId) {
+    Optional<LiveStreamSample> sample =
+        deviceId == null
+            ? repository.findTopByOrderByTsDesc()
+            : repository.findTopByDeviceIdOrderByTsDesc(deviceId);
+    return sample.map(this::toResponse);
   }
 
   private LiveStreamSampleResponse toResponse(LiveStreamSample sample) {
