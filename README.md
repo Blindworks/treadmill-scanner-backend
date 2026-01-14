@@ -71,6 +71,33 @@ curl "http://localhost:8080/api/treadmill/devices/REEBOK_1020/sessions?limit=50"
   -H "X-API-Key: local-dev-key"
 ```
 
+### Ingest a live stream sample
+
+```bash
+curl -X POST http://localhost:8080/api/live/stream \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: local-dev-key" \
+  -d '{
+    "deviceId": "REEBOK_1020",
+    "sessionId": "2026-01-14T10:00:00Z",
+    "ts": "2026-01-14T10:56:30Z",
+    "speedKmh": 10.0,
+    "inclinePct": 2.0,
+    "distanceM": 490,
+    "elapsedS": 180,
+    "totalKcal": 39,
+    "hrBpm": 0,
+    "rawHex": "9C05E803EA010014"
+  }'
+```
+
+### Get live stream samples for a device
+
+```bash
+curl "http://localhost:8080/api/live/stream?deviceId=REEBOK_1020&limit=200" \
+  -H "X-API-Key: local-dev-key"
+```
+
 ## Hosting (Railway)
 
 - Create a PostgreSQL database in Railway.
