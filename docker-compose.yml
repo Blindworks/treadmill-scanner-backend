@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: treadmill
+      POSTGRES_USER: treadmill
+      POSTGRES_PASSWORD: treadmill
+    ports:
+      - "5432:5432"
+  api:
+    build: .
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/treadmill
+      SPRING_DATASOURCE_USERNAME: treadmill
+      SPRING_DATASOURCE_PASSWORD: treadmill
+      TREADMILL_API_KEY: local-dev-key
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
