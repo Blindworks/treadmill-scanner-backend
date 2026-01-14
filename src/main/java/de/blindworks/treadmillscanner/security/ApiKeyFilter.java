@@ -50,6 +50,7 @@ public class ApiKeyFilter extends OncePerRequestFilter {
   private void addCorsHeaders(HttpServletRequest request, HttpServletResponse response) {
     String origin = request.getHeader("Origin");
     response.setHeader("Access-Control-Allow-Origin", StringUtils.hasText(origin) ? origin : "*");
+    response.setHeader("Access-Control-Allow-Credentials", "true");
     response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
     String requestHeaders = request.getHeader("Access-Control-Request-Headers");
     response.setHeader(
