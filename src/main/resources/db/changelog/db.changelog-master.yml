@@ -1,0 +1,71 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: codex
+      changes:
+        - createTable:
+            tableName: treadmill_sample
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: device_id
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: session_id
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ts
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: speed_kmh
+                  type: DOUBLE PRECISION
+              - column:
+                  name: incline_pct
+                  type: DOUBLE PRECISION
+              - column:
+                  name: distance_m
+                  type: BIGINT
+              - column:
+                  name: elapsed_s
+                  type: INTEGER
+              - column:
+                  name: total_kcal
+                  type: INTEGER
+              - column:
+                  name: hr_bpm
+                  type: INTEGER
+              - column:
+                  name: raw_hex
+                  type: VARCHAR(512)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false
+        - createIndex:
+            tableName: treadmill_sample
+            indexName: idx_treadmill_sample_device_ts
+            columns:
+              - column:
+                  name: device_id
+              - column:
+                  name: ts
+        - createIndex:
+            tableName: treadmill_sample
+            indexName: idx_treadmill_sample_session_ts
+            columns:
+              - column:
+                  name: session_id
+              - column:
+                  name: ts
