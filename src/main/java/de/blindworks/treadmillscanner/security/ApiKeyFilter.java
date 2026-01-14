@@ -27,12 +27,33 @@ public class ApiKeyFilter extends OncePerRequestFilter {
       return;
     }
 
+    if (isPreflightRequest(request)) {
+      addCorsHeaders(request, response);
+      response.setStatus(HttpServletResponse.SC_OK);
+      return;
+    }
+
     String apiKey = request.getHeader(API_KEY_HEADER);
     if (!StringUtils.hasText(expectedApiKey) || !expectedApiKey.equals(apiKey)) {
+      addCorsHeaders(request, response);
       response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
       return;
     }
 
     filterChain.doFilter(request, response);
+  }
+
+  private boolean isPreflightRequest(HttpServletRequest request) {
+    return "options".equalsIgnoreCase(request.getMethod());
+  }
+
+  private void addCorsHeaders(HttpServletRequest request, HttpServletResponse response) {
+    String origin = request.getHeader("Origin");
+    response.setHeader("Access-Control-Allow-Origin", StringUtils.hasText(origin) ? origin : "*");
+    response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    String requestHeaders = request.getHeader("Access-Control-Request-Headers");
+    response.setHeader(
+        "Access-Control-Allow-Headers", StringUtils.hasText(requestHeaders) ? requestHeaders : "*");
+    response.setHeader("Vary", "Origin, Access-Control-Request-Headers");
   }
 }
