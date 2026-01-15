@@ -27,15 +27,15 @@ public class ApiKeyFilter extends OncePerRequestFilter {
       return;
     }
 
+    addCorsHeaders(request, response);
+
     if (isPreflightRequest(request)) {
-      addCorsHeaders(request, response);
       response.setStatus(HttpServletResponse.SC_OK);
       return;
     }
 
     String apiKey = request.getHeader(API_KEY_HEADER);
     if (!StringUtils.hasText(expectedApiKey) || !expectedApiKey.equals(apiKey)) {
-      addCorsHeaders(request, response);
       response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
       return;
     }
