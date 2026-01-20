@@ -1,0 +1,246 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: codex
+      changes:
+        - createTable:
+            tableName: treadmill_sample
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: device_id
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: session_id
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ts
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: speed_kmh
+                  type: DOUBLE PRECISION
+              - column:
+                  name: incline_pct
+                  type: DOUBLE PRECISION
+              - column:
+                  name: distance_m
+                  type: BIGINT
+              - column:
+                  name: elapsed_s
+                  type: INTEGER
+              - column:
+                  name: total_kcal
+                  type: INTEGER
+              - column:
+                  name: hr_bpm
+                  type: INTEGER
+              - column:
+                  name: raw_hex
+                  type: VARCHAR(512)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false
+        - createIndex:
+            tableName: treadmill_sample
+            indexName: idx_treadmill_sample_device_ts
+            columns:
+              - column:
+                  name: device_id
+              - column:
+                  name: ts
+        - createIndex:
+            tableName: treadmill_sample
+            indexName: idx_treadmill_sample_session_ts
+            columns:
+              - column:
+                  name: session_id
+              - column:
+                  name: ts
+  - changeSet:
+      id: 2
+      author: codex
+      context: dev
+      changes:
+        - insert:
+            tableName: treadmill_sample
+            columns:
+              - column:
+                  name: device_id
+                  value: dev-device-01
+              - column:
+                  name: session_id
+                  value: session-001
+              - column:
+                  name: ts
+                  valueComputed: "TIMESTAMP WITH TIME ZONE '2024-08-01T10:00:00Z'"
+              - column:
+                  name: speed_kmh
+                  valueNumeric: 8.5
+              - column:
+                  name: incline_pct
+                  valueNumeric: 1.5
+              - column:
+                  name: distance_m
+                  valueNumeric: 500
+              - column:
+                  name: elapsed_s
+                  valueNumeric: 300
+              - column:
+                  name: total_kcal
+                  valueNumeric: 45
+              - column:
+                  name: hr_bpm
+                  valueNumeric: 120
+              - column:
+                  name: raw_hex
+                  value: "0xAA01"
+              - column:
+                  name: created_at
+                  valueComputed: "TIMESTAMP WITH TIME ZONE '2024-08-01T10:00:01Z'"
+        - insert:
+            tableName: treadmill_sample
+            columns:
+              - column:
+                  name: device_id
+                  value: dev-device-01
+              - column:
+                  name: session_id
+                  value: session-001
+              - column:
+                  name: ts
+                  valueComputed: "TIMESTAMP WITH TIME ZONE '2024-08-01T10:05:00Z'"
+              - column:
+                  name: speed_kmh
+                  valueNumeric: 9.0
+              - column:
+                  name: incline_pct
+                  valueNumeric: 2.0
+              - column:
+                  name: distance_m
+                  valueNumeric: 1500
+              - column:
+                  name: elapsed_s
+                  valueNumeric: 600
+              - column:
+                  name: total_kcal
+                  valueNumeric: 90
+              - column:
+                  name: hr_bpm
+                  valueNumeric: 128
+              - column:
+                  name: raw_hex
+                  value: "0xAA02"
+              - column:
+                  name: created_at
+                  valueComputed: "TIMESTAMP WITH TIME ZONE '2024-08-01T10:05:01Z'"
+        - insert:
+            tableName: treadmill_sample
+            columns:
+              - column:
+                  name: device_id
+                  value: dev-device-02
+              - column:
+                  name: session_id
+                  value: session-002
+              - column:
+                  name: ts
+                  valueComputed: "TIMESTAMP WITH TIME ZONE '2024-08-02T18:20:00Z'"
+              - column:
+                  name: speed_kmh
+                  valueNumeric: 6.2
+              - column:
+                  name: incline_pct
+                  valueNumeric: 0.0
+              - column:
+                  name: distance_m
+                  valueNumeric: 800
+              - column:
+                  name: elapsed_s
+                  valueNumeric: 420
+              - column:
+                  name: total_kcal
+                  valueNumeric: 60
+              - column:
+                  name: hr_bpm
+                  valueNumeric: 110
+              - column:
+                  name: raw_hex
+                  value: "0xBB01"
+              - column:
+                  name: created_at
+                  valueComputed: "TIMESTAMP WITH TIME ZONE '2024-08-02T18:20:01Z'"
+  - changeSet:
+      id: 3
+      author: codex
+      changes:
+        - createTable:
+            tableName: live_stream_sample
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: device_id
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: session_id
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ts
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: speed_kmh
+                  type: DOUBLE PRECISION
+              - column:
+                  name: incline_pct
+                  type: DOUBLE PRECISION
+              - column:
+                  name: distance_m
+                  type: BIGINT
+              - column:
+                  name: elapsed_s
+                  type: INTEGER
+              - column:
+                  name: total_kcal
+                  type: INTEGER
+              - column:
+                  name: hr_bpm
+                  type: INTEGER
+              - column:
+                  name: raw_hex
+                  type: VARCHAR(512)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false
+        - createIndex:
+            tableName: live_stream_sample
+            indexName: idx_live_stream_sample_device_ts
+            columns:
+              - column:
+                  name: device_id
+              - column:
+                  name: ts
